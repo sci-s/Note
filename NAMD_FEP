@@ -1,26 +1,7 @@
+NAMD FEP Basics
+https://www.ks.uiuc.edu/Research/namd/2.13/ug/node60.html
 Free Energy Perturbation
 Within the FEP framework  [8,21,22,34,52,62,98,101,111], the free energy difference between two alternate states, $ a$ and $ b$ , is expressed by:
 
 $\displaystyle \Delta A_{a \rightarrow b} = -\frac{1}{\beta} \ \ln \left\langle ...
-...}, {\bf p}_x) - {\cal H}_a({\bf x}, {\bf p}_x) \right] \right\} \right\rangle_a$	(66)
-
-Here, $ \beta^{-1} \equiv k_B T$ , where $ k_B$ is the Boltzmann constant, $ T$ is the temperature. $ {\cal H}_a({\bf x}, {\bf p}_x)$ and $ {\cal H}_b({\bf x}, {\bf p}_x)$ are the Hamiltonians describing states $ a$ and $ b$ , respectively. $ \left\langle \cdots \right\rangle_a$ denotes an ensemble average over configurations representative of the initial, reference state, $ a$ .
-
-Figure: Convergence of an FEP calculation. If the ensembles representative of states $ a$ and $ b$ are too disparate, equation (67) will not converge (a). If, in sharp contrast, the configurations of state $ b$ form a subset of the ensemble of configurations characteristic of state $ a$ , the simulation is expected to converge (b). The difficulties reflected in case (a) may be alleviated by the introduction of mutually overlapping intermediate states that connect $ a$ to $ b$ (c). It should be mentioned that in practice, the kinetic contribution, $ {\cal T}({\bf p}_x)$ , is assumed to be identical for state $ a$ and state $ b$ .
-
-
-\includegraphics[width=4cm]{figures/overlap1} (a) \includegraphics[width=4cm]{figures/overlap2} (b) \includegraphics[width=4cm]{figures/overlap3} (c)
-Convergence of equation (67) implies that low-energy configurations of the target state, $ b$ , are also configurations of the reference state, $ a$ , thus resulting in an appropriate overlap of the corresponding ensembles -- see Figure 7. Transformation between the two thermodynamic states is replaced by a series of transformations between non-physical, intermediate states along a well-delineated pathway that connects $ a$ to $ b$ . This pathway is characterized by the general extent parameter [8,49,50,62], $ \lambda $ , that makes the Hamiltonian and, hence, the free energy, a continuous function of this parameter between $ a$ and $ b$ :
-
-$\displaystyle \Delta A_{a \rightarrow b} = -\frac{1}{\beta} \ \sum_{i = 1}^N \l...
-...+1}) - {\cal H}({\bf x}, {\bf p}_x; \lambda_i) \right] \right\} \right\rangle_i$	(67)
-
-Here, $ N$ stands for the number of intermediate stages, or ``windows'' between the initial and the final states -- see Figure 7.
-
-Thermodynamic Integration
-An alternative to the perturbation formula for free energy calculation is Thermodynamic Integration (TI). With the TI method, the free energy is given as [50,97,31]:
-
-$\displaystyle \Delta A = \int_0^1 \left<\frac{\partial {\cal H}({\bf x}, {\bf p}_x; \lambda)}{\partial \lambda}\right>_\lambda d\lambda$	(68)
-
-In the multi-configuration thermodynamic integration approach  [97] implemented in NAMD, $ \left<\partial {\cal H}({\bf x},
-{\bf p}_x; \lambda) / \partial \lambda~\right>_\lambda $ , the ensemble average of the derivative of the internal energy with respect to $ \lambda $ , is collected for a series of discrete $ \lambda $ values and written to tiOutFile. These values are analyzed by the separately distributed script NAMD_ti.pl, which performs the integration of individual energy components and reports back the total $ \Delta A$ values for the transformation.
+...}, {\bf p}_x) - {\cal H}_a({\bf x}, {\bf p}_x) \right] \right\} \right\rangle_a$
